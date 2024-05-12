@@ -29,7 +29,6 @@ const Signup = () => {
         const payload = {
             email: data.get('email'),
             password: data.get('password'),
-            dob: data.get('dob'),
             contactNo: data.get('contactNo'),
             firstName: data.get('firstName'),
             lastName: data.get('lastName'),
@@ -37,9 +36,8 @@ const Signup = () => {
         };
         console.log(payload);
         try {
-            const isLoggedin = await axios.post(`${apiUrl}/create`, payload);
+            const isLoggedin = await axios.post(`${apiUrl}/user/register`, payload);
             if (isLoggedin) {
-
                 toast.success('Account Created')
                 navigate('/login');
             }
@@ -98,26 +96,14 @@ const Signup = () => {
                                     autoComplete="family-name"
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={6}>
+                            <Grid item xs={12}>
                                 <TextField
+                                    required
+                                    fullWidth
                                     name="contactNo"
-                                    required
-                                    fullWidth
+                                    label="contact Number"
+                                    type="number"
                                     id="contactNo"
-                                    label="Phone"
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="dob"
-                                    type='date'
-                                    label="Date of Birth"
-                                    name="dob"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -149,8 +135,9 @@ const Signup = () => {
                                         aria-labelledby="demo-row-radio-buttons-group-label"
                                         name="role"
                                     >
-                                        <FormControlLabel value="store" control={<Radio />} label="Store owner" />
-                                        <FormControlLabel value="customer" control={<Radio />} label="Customer" />
+                                        <FormControlLabel value="user" control={<Radio />} label="Student" />
+                                        <FormControlLabel value="instruct" control={<Radio />} label="instructer" />
+                                        <FormControlLabel value="admin" control={<Radio />} label="admin" />
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>

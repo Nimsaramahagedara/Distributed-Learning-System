@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './pages/common/Login'
+import Signup from './pages/common/Signup'
 import NotFound from './pages/common/NotFound'
 import Dashboard from './pages/common/Dashboard';
 import UserProfile from './pages/common/UserProfile';
@@ -20,6 +21,7 @@ export default function App() {
           <Route path='' element={<Dashboard />} >
             <Route path='/' element={<Login />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/SignUp' element={<Signup/>}/>
           </Route>
 
           <Route path='/admin' element={<Dashboard />}>

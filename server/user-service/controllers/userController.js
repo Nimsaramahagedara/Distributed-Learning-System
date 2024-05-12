@@ -5,7 +5,7 @@ export const registerUser = async (req, res) => {
     const data = req.body;
     console.log(data);
     try {
-        if (!data?.email || !data?.password || !data?.firstName || !data?.lastName) {
+        if (!data?.email || !data?.password || !data?.firstName || !data?.lastName ||!data?.contactNo ) {
             throw Error('one or more field is missing');
         }
         const isExist = await UserModel.findOne({email:data.email});
