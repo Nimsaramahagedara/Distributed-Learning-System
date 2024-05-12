@@ -59,7 +59,7 @@ export const learnerListItems = (
       <ListItemText primary="Home" />
     </ListItemButton>
   </Link>
-  <Link to={'/search'}>
+  <Link to={'./search'}>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
@@ -67,7 +67,7 @@ export const learnerListItems = (
       <ListItemText primary="Search" />
     </ListItemButton>
   </Link>
-  <Link to={'/my-learning'}>
+  <Link to={'./my-learning'}>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
@@ -83,7 +83,7 @@ export const learnerListItems = (
       <ListItemText primary="Profile" />
     </ListItemButton>
   </Link>
-  <Link to={'/transactions'}>
+  <Link to={'./transactions'}>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
