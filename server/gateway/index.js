@@ -24,7 +24,8 @@ app.get('/', async (req, res) => {
 app.use('/pay', createProxyMiddleware({
     target: PAY_SERVICE,
     changeOrigin: true,
-}))
+}));
+
 
 app.use('/course', createProxyMiddleware({
     target: COURSE_SERVICE,
