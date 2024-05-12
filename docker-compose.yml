@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  express-proxy:
+    build: ./gateway # Path to the directory containing the Express.js proxy server Dockerfile
+    ports:
+      - "5000:5000" # Map container port 5000 to host port 5000
+    depends_on:
+      - pay-service # Ensure the pay service container is started first
+
+  pay-service:
+    build: ./payment-service # Path to the directory containing the pay service Dockerfile
+    ports:
+      - "5002:5002" # Map container port 5002 to host port 5002
