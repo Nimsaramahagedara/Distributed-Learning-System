@@ -13,14 +13,14 @@ const PORT = process.env.PORT || 5002
 
 app.get('/', async (req, res) => {
     try {
-       res.status(200).json({message:'Server is up and running on port '+ PORT})
+        res.status(200).json({ message: 'Payment Server is up and running on port ' + PORT })
     } catch (error) {
-        res.status(500).json({message:error})
+        res.status(500).json({ message: error })
     }
 
 })
 
-app.use('/pay', paymentRouter)
+app.use('/', paymentRouter)
 
 app.listen(PORT, () => {
     console.log(`Payment Service Started on port `, PORT);

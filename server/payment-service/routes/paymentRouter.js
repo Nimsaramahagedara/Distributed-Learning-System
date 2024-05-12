@@ -3,7 +3,7 @@ import { getAllTxs, getAllUserTx, getPayment, payementSuccess, payFail } from '.
 
 const paymentRouter = express.Router()
 
-paymentRouter.get('/',getAllTxs)
+paymentRouter.get('/all',getAllTxs)
 paymentRouter.get('/:id',getAllUserTx)
 paymentRouter.get('/paymentSuccess',payementSuccess)
 paymentRouter.get('/paymentFail',payFail)

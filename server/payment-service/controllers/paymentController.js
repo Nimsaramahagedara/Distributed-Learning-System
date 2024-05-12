@@ -45,6 +45,7 @@ export const getAllUserTx = async (req, res) => {
 }
 
 export const getAllTxs = async (req, res) => {
+    console.log('Getting all txs');
     try {
         const tx = await getAllTx(req.params.uid)
         res.status(200).json(tx)
