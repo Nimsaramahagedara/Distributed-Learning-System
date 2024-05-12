@@ -28,6 +28,10 @@ app.use('/pay', createProxyMiddleware({
     changeOrigin: true,
 }))
 
+//Create other proxy addresses here
+
+
+
 // Error Handling
 app.use((err, req, res, next) => {
     console.error(err.stack);
