@@ -19,6 +19,7 @@ export const getPayment = async (req, res) => {
 
 export const payementSuccess = async (req, res) => {
     try {
+        console.log('creating transaction...');
         const txdata = {
             userId: req?.query?.uid,
             productId: req?.query?.productId,
@@ -28,6 +29,8 @@ export const payementSuccess = async (req, res) => {
         }
 
         const tx = await createTransaction(txdata)
+        console.log(tx);
+        console.log( process.env.CLIENT_ADDRESS);
         const clientPaySucUrl = process.env.CLIENT_ADDRESS + '/payment-done'
         res.redirect(clientPaySucUrl);
     } catch (error) {

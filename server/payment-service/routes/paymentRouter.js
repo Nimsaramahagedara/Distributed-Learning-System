@@ -5,9 +5,9 @@ import { loginValidator } from '../middlewares/loginValidator.js';
 const paymentRouter = express.Router()
 
 paymentRouter.get('/all',getAllTxs)
-paymentRouter.get('/:id',getAllUserTx)
 paymentRouter.get('/paymentSuccess',payementSuccess)
 paymentRouter.get('/paymentFail',payFail)
+paymentRouter.get('/:id',getAllUserTx)
 paymentRouter.post('/',loginValidator,getPayment)
 
 
