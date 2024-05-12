@@ -86,7 +86,7 @@ const InstructorHome = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${apiUrl}/`);
+        const response = await fetch(`${apiUrl}/course/`);
         const data = await response.json();
         setNotices(data);
         setIsLoading(false);
@@ -109,7 +109,7 @@ const InstructorHome = () => {
 
   const publishNotice = async () => {
     try {
-      const result = await fetch(`${apiUrl}/`, {
+      const result = await fetch(`${apiUrl}/course/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const InstructorHome = () => {
 
   const handleDeleteNotice = async (id) => {
     try {
-      const result = await authAxios.delete(`${apiUrl}/${id}`);
+      const result = await authAxios.delete(`${apiUrl}/course/${id}`);
 
       if (result) {
         handleClose2();
@@ -150,7 +150,7 @@ const InstructorHome = () => {
 
   const handleUpdate = async () => {
     try {
-      const result = await authAxios.put(`${apiUrl}/${updateFormData._id}`, updateFormData);
+      const result = await authAxios.put(`${apiUrl}/course/${updateFormData._id}`, updateFormData);
 
       if (result) {
         toast.success('Notice Updated Successfully');
