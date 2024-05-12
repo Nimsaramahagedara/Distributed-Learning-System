@@ -15,22 +15,25 @@ const PORT = process.env.PORT || 5000
 
 app.get('/', async (req, res) => {
     try {
-       res.status(200).json({message:'Server is up and running on port '+ PORT})
+        res.status(200).json({ message: 'Proxy Server is up and running on port ' + PORT })
     } catch (error) {
-        res.status(500).json({message:error})
+        res.status(500).json({ message: error })
     }
 
 })
 
 
-app.use('/pay',createProxyMiddleware({
+app.use('/pay', createProxyMiddleware({
     target: PAY_SERVICE,
     changeOrigin: true,
-    pathRewrite: {
-        [`^/json_placeholder`]: '',
-    },
- }))
+}))
 
+// Error Handling
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
 app.listen(PORT, () => {
+    console.log(PAY_SERVICE);
     console.log(`Proxy Server Started on port `, PORT);
 })
