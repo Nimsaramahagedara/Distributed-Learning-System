@@ -161,7 +161,7 @@ export default function Dashboard() {
       //   navigate("/");
     }
 
-  }, []);
+  }, [userRole]);
 
   const getUserDetails = async () => {
     try {
