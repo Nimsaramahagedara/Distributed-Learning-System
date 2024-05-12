@@ -29,12 +29,13 @@ export default function Login() {
     };
     try {
       const isLoggedin = await axios.post(`${apiUrl}/user/login`, payload);
+      console.log(isLoggedin);
       if (isLoggedin) {
         Cookies.set("firstName", isLoggedin.data.firstName);
 
-        login(isLoggedin.data.userRole, isLoggedin.data.token);
+        login(isLoggedin.data.role, isLoggedin.data.token);
 
-        switch (isLoggedin.data.userRole) {
+        switch (isLoggedin.data.role) {
           case "admin": //admin
             toast.success("Login Success as an Admin");
             navigate("/seller/home");
@@ -43,12 +44,12 @@ export default function Login() {
             toast.success("Login Success as a Instructor");
             navigate("/customer/home");
             break;
-          case "learner": //Learner
+          case "user": //Learner
             toast.success("Login Success as a Learner");
             navigate("/learner/home");
             break;
         }
-        window.location.reload();
+        //window.location.reload();
       }
     } catch (error) {
       if (error.message) {
