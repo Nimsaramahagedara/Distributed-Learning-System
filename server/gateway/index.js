@@ -4,7 +4,7 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 dotenv.config()
 import { createProxyMiddleware } from 'http-proxy-middleware'
-import { PAY_SERVICE, COURSE_SERVICE } from './services.js'
+import { PAY_SERVICE, COURSE_SERVICE, USER_SERVICE } from './services.js'
 
 const app = express()
 app.use(cors())
@@ -31,6 +31,11 @@ app.use('/course', createProxyMiddleware({
     changeOrigin: true,
 }))
 
+app.use('/user', createProxyMiddleware({
+    target: USER_SERVICE,
+    changeOrigin: true,
+}))
+
 //Create other proxy addresses here
 
 
@@ -40,7 +45,5 @@ app.use((err, req, res, next) => {
     res.status(500).send('Something broke!');
 });
 app.listen(PORT, () => {
-    console.log(PAY_SERVICE);
-    console.log(COURSE_SERVICE);
     console.log(`Proxy Server Started on port `, PORT);
 })
