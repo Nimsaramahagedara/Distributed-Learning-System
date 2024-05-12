@@ -110,7 +110,8 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
   const [navLinks, setNavlinks] = useState();
-  const { logout, userRole } = useAuth();
+  // const { logout, userRole } = useAuth();
+  const userRole = "learner"
   const [open, setOpen] = React.useState(true);
   const [userAPI, setuserAPI] = useState('');
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -149,7 +150,7 @@ export default function Dashboard() {
         }
         setNavlinks(instructorListItems);
         break;
-      case "user": //Support
+      case "learner": //Support
         if (userAPI != null) {
           setuserAPI('learner')
           setAuth(true);
@@ -161,7 +162,7 @@ export default function Dashboard() {
       //   navigate("/");
     }
 
-  }, [userRole]);
+  }, []);
 
   const getUserDetails = async () => {
     try {
@@ -252,13 +253,13 @@ export default function Dashboard() {
             onClose={handleCloseUserMenu}
           >
             <MenuItem>
-              <Typography textAlign="center" >{user.firstName} {user.lastName}</Typography>
+              <Typography textAlign="center" Disabled >{user.firstName} {user.lastName}</Typography>
             </MenuItem>
             <MenuItem onClick={() => navigate('profile')}>
-              <Typography textAlign="center" >Profile</Typography>
+              <Typography textAlign="center" Disabled >Profile</Typography>
             </MenuItem>
             <MenuItem onClick={() => logout()}>
-              <Typography textAlign="center" >Logout</Typography>
+              <Typography textAlign="center" Disabled >Logout</Typography>
             </MenuItem>
           </Menu>
         </AppBar>
