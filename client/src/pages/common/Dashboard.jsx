@@ -166,7 +166,7 @@ export default function Dashboard() {
 
   const getUserDetails = async () => {
     try {
-      const response = await authAxios.get(`${apiUrl}/get-user`);
+      const response = await authAxios.get(`${apiUrl}/user/loggedInUser`);
       setUser(response.data);
     } catch (error) {
       console.error(error);
