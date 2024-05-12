@@ -4,6 +4,8 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 dotenv.config()
 import paymentRouter from './routes/paymentRouter.js'
+import { dbConfig } from './utils/dbConfig.js'
+
 
 const app = express()
 app.use(cors())
@@ -21,7 +23,8 @@ app.get('/', async (req, res) => {
 })
 
 app.use('/', paymentRouter)
-
-app.listen(PORT, () => {
-    console.log(`Payment Service Started on port `, PORT);
-})
+dbConfig().then(()=>{
+    app.listen(PORT, () => {
+        console.log(`Payment Service Started on port `, PORT);
+    })    
+}).catch(e=>console.log(e))
