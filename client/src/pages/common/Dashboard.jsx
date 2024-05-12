@@ -110,8 +110,7 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
   const [navLinks, setNavlinks] = useState();
-  // const { logout, userRole } = useAuth();
-  const userRole = "instructor"
+  const { logout, userRole } = useAuth();
   const [open, setOpen] = React.useState(true);
   const [userAPI, setuserAPI] = useState('');
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -150,7 +149,7 @@ export default function Dashboard() {
         }
         setNavlinks(instructorListItems);
         break;
-      case "learner": //Support
+      case "user": //Support
         if (userAPI != null) {
           setuserAPI('learner')
           setAuth(true);
