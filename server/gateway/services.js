@@ -1,0 +1,1 @@
+export const PAY_SERVICE = process.env.PAYMENT_SERVER_ADDRESS || 'http://localhos:5002'
