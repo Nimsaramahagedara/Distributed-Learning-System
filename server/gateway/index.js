@@ -5,9 +5,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 import { createProxyMiddleware,fixRequestBody } from 'http-proxy-middleware'
 import { PAY_SERVICE, COURSE_SERVICE, USER_SERVICE, NOTI_SERVICE } from './services.js'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 app.use(cors())
+app.use(cookieParser())
 app.use(express.json())
 app.use(morgan('dev'))
 const PORT = process.env.PORT || 5000
