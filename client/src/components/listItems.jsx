@@ -59,5 +59,37 @@ export const learnerListItems = (
       <ListItemText primary="Home" />
     </ListItemButton>
   </Link>
+  <Link to={'/search'}>
+    <ListItemButton>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="Search" />
+    </ListItemButton>
+  </Link>
+  <Link to={'/my-learning'}>
+    <ListItemButton>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="My Learning" />
+    </ListItemButton>
+  </Link>
+  <Link to={'/profile'}>
+    <ListItemButton>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="Profile" />
+    </ListItemButton>
+  </Link>
+  <Link to={'/transactions'}>
+    <ListItemButton>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="Transactions" />
+    </ListItemButton>
+  </Link>
   </React.Fragment>
 );

@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Loader from '../../components/Loader/Loader'
 import MainCarousel from '../../components/Carousel/MainCarousel'
+import authAxios from '../../utils/authAxios'
+import { apiUrl } from '../../utils/Constants'
+import CourseCard from '../../components/Course/CourseCard'
 
 export default function Home() {
+
+  const [courses, setCourses] = useState([])
+
+  const getAllCourses = async () => {
+    try {
+      const resp = await authAxios.get(`${apiUrl}/course`);
+      console.log(resp.data);
+      setCourses(resp.data)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getAllCourses()
+  }, [])
   return (
     <div className='w-full'>
       <div className='flex items-stretch justify-center bg-white p-5 border rounded-xl gap-5'>
@@ -23,7 +42,18 @@ export default function Home() {
       </div>
 
       <div className='text-xl font-semibold my-5'>
-        Recommended Courses
+        <h1 className='my-5'>Recommended Courses</h1>
+
+        <div className='w-full overflow-x-scroll'>
+          <div className='flex items-center justify-start gap-5 w-max'>
+          {
+            courses && courses.slice(0,10).map((c)=>(
+              <CourseCard course={c}/>
+            ))
+          }
+          </div>
+
+        </div>
       </div>
     </div>
   )
