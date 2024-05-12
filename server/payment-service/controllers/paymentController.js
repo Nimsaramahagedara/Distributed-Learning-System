@@ -28,7 +28,7 @@ export const payementSuccess = async (req, res) => {
         }
 
         const tx = await createTransaction(txdata)
-        const clientPaySucUrl = process.env.CLIENT_ADDRESS + '/payement-done'
+        const clientPaySucUrl = process.env.CLIENT_ADDRESS + '/payment-done'
         res.redirect(clientPaySucUrl);
     } catch (error) {
         res.status(500).json({ message: error.message })

@@ -12,14 +12,17 @@ import LearnerHome from './pages/learner/Home';
 import AdminHome from './pages/admin/Home';
 import InstructorHome from './pages/instructor/Home';
 import CourseViewPage from './pages/learner/CourseViewPage';
+import PaymentSuccess from './pages/common/PaymentSuccess';
 export default function App() {
   return (
     <BrowserRouter>
       <ToastContainer autoClose={1000} />
       <AuthProvider>
         <Routes>
+
           <Route path='*' element={<NotFound />} />
           <Route path='/' element={<Login />} />
+          <Route path='/payment-done' element={<PaymentSuccess/>}/>
           <Route path='/login' element={<Login />} />
           <Route path='/SignUp' element={<Signup />} />
           <Route path='' element={<Dashboard />} >
@@ -44,6 +47,7 @@ export default function App() {
             <Route path='profile' element={<UserProfile />} />
             <Route path='course/:id' element={<CourseViewPage />} />
           </Route>
+          
         </Routes>
       </AuthProvider>
     </BrowserRouter>

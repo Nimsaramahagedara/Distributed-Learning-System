@@ -23,7 +23,7 @@ app.get('/', async (req, res) => {
 
 })
 
-app.use('/',loginValidator ,paymentRouter)
+app.use('/' ,paymentRouter)
 
 
 app.get('*', async (req, res) => {
