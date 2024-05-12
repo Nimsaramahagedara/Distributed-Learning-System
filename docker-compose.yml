@@ -12,3 +12,8 @@ services:
     build: ./server/payment-service # Path to pay service Dockerfile
     ports:
       - "5002:5002" #port 5002
+
+  course-management-service:
+    build: ./server/course-management-service 
+    ports:
+      -"5001:5001"

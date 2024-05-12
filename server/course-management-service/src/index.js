@@ -6,7 +6,7 @@ import courseRouter from './routes/CourseRouter.js';
 import contentRouter from './routes/CourseContentRoutes.js';
 import cors from 'cors';
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5001;
 const app = express();
 app.use(express.json());
 dotenv.config();
