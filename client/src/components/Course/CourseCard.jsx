@@ -10,11 +10,11 @@ const CourseCard = ({ course }) => {
     const navigate = useNavigate()
 
     return (
-        <Card sx={{ maxWidth: 345 }} onClick={()=>navigate(`./course/${course?._id}`)}>
+        <Card sx={{ maxWidth: 320 }} onClick={()=>navigate(`./course/${course?._id}`)}>
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    height="140"
+                    height="50"
                     image={course?.image ? course.image : "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"}
                     alt="green iguana"
                 />
