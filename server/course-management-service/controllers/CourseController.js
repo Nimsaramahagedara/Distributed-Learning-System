@@ -1,4 +1,4 @@
-import CourseModel from "../models/courseModel.js";
+import CourseModel from "../models/CourseModel.js";
 
 export const createCourse = async (req, res) => {
     try {
