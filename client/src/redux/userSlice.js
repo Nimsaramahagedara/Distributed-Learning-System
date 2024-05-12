@@ -5,10 +5,17 @@ export const userSlice = createSlice({
     name:'user',
     initialState:{
         userId:Cookies.get('uid'),
+        role:Cookies.get('role'),
+        token:Cookies.get('token')
     },
     reducers:{
-        updateUser:(state, action)=>{
-            state.userId = action.payload; // Update user with the payload
+        storeUser:(state, action)=>{
+            state.userId = action.payload.userId; 
+            state.role = action.payload.role;
+
+            Cookies.set('role',action.payload.role)
+            Cookies.set('uid',action.payload.userId)
+            Cookies.set('token',action.payload.token)
         },
     }
 })
