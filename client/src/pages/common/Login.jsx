@@ -38,15 +38,15 @@ export default function Login() {
         switch (isLoggedin.data.role) {
           case "admin": //admin
             toast.success("Login Success as an Admin");
-            navigate("/seller/home");
+            navigate("/admin");
             break;
           case "instructor": //instructor
             toast.success("Login Success as a Instructor");
-            navigate("/customer/home");
+            navigate("/instructor");
             break;
           case "user": //Learner
             toast.success("Login Success as a Learner");
-            navigate("/learner/home");
+            navigate("/learner");
             break;
         }
         //window.location.reload();
