@@ -11,6 +11,7 @@ import UserProfile from './pages/common/UserProfile';
 import LearnerHome from './pages/learner/Home';
 import AdminHome from './pages/admin/Home';
 import InstructorHome from './pages/instructor/Home';
+import CourseViewPage from './pages/learner/CourseViewPage';
 export default function App() {
   return (
     <BrowserRouter>
@@ -41,6 +42,7 @@ export default function App() {
             <Route path='' element={<LearnerHome />} />
             <Route path='home' element={<LearnerHome />} />
             <Route path='profile' element={<UserProfile />} />
+            <Route path='course/:id' element={<CourseViewPage />} />
           </Route>
         </Routes>
       </AuthProvider>

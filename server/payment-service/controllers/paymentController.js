@@ -11,7 +11,7 @@ export const getPayment = async (req, res) => {
 
         const payUrl = await createPayment(data.userId, data.productId, data.qty, data.price, data.name)
 
-        res.redirect(payUrl);
+        res.status(200).json({payUrl : payUrl});
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
