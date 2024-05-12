@@ -22,7 +22,6 @@ const CourseViewPage = () => {
         try {
             const data = {
                 productId: course?._id,
-                userId: '124',
                 qty: 1,
                 name: course?.name,
                 price: course?.fee
