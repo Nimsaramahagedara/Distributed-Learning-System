@@ -4,7 +4,7 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 dotenv.config()
 import { createProxyMiddleware } from 'http-proxy-middleware'
-import { PAY_SERVICE, COURSE_SERVICE, USER_SERVICE } from './services.js'
+import { PAY_SERVICE, COURSE_SERVICE, USER_SERVICE, NOTI_SERVICE } from './services.js'
 
 const app = express()
 app.use(cors())
@@ -33,6 +33,11 @@ app.use('/course', createProxyMiddleware({
 
 app.use('/user', createProxyMiddleware({
     target: USER_SERVICE,
+    changeOrigin: true,
+}))
+
+app.use('/notification', createProxyMiddleware({
+    target: NOTI_SERVICE,
     changeOrigin: true,
 }))
 
