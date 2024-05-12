@@ -27,7 +27,23 @@ export const instructorListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Home" />
+      <ListItemText primary="My Courses" />
+    </ListItemButton>
+  </Link>
+  <Link to={'/instructor/content'}>
+    <ListItemButton>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="Manage Content" />
+    </ListItemButton>
+  </Link>
+  <Link to={'/instructor/enrollemnts'}>
+    <ListItemButton>
+      <ListItemIcon>
+        <DashboardIcon />
+      </ListItemIcon>
+      <ListItemText primary="Enrollments" />
     </ListItemButton>
   </Link>
   </React.Fragment>

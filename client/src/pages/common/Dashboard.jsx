@@ -111,7 +111,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [navLinks, setNavlinks] = useState();
   // const { logout, userRole } = useAuth();
-  const userRole = "learner"
+  const userRole = "instructor"
   const [open, setOpen] = React.useState(true);
   const [userAPI, setuserAPI] = useState('');
   const [anchorElUser, setAnchorElUser] = React.useState(null);
