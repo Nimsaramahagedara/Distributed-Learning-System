@@ -5,13 +5,13 @@ export const getPayment = async (req, res) => {
     try {
         const data = req.body;
         console.log(data);
-        if (!data?.userId || !data?.productId, !data?.qty || !data?.name || !data?.price) {
+        if (!data?.userid || !data?.productId, !data?.qty || !data?.name || !data?.price) {
             throw Error('required fields are missing {userId,productId,name,price,qty }')
         }
 
-        const payUrl = await createPayment(data.userId, data.productId, data.qty, data.price, data.name)
+        const payUrl = await createPayment(data.userid, data.productId, data.qty, data.price, data.name)
 
-        res.redirect(payUrl);
+        res.status(200).json({payUrl : payUrl});
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

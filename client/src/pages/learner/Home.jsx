@@ -45,7 +45,7 @@ export default function Home() {
         <h1 className='my-5'>Recommended Courses</h1>
 
         <div className='w-full overflow-x-scroll'>
-          <div className='flex items-center justify-start gap-5 w-max'>
+          <div className='flex items-center justify-start gap-5 w-max py-10'>
           {
             courses && courses.slice(0,10).map((c)=>(
               <CourseCard course={c}/>
