@@ -75,7 +75,7 @@ export const learnerListItems = (
       <ListItemText primary="My Learning" />
     </ListItemButton>
   </Link>
-  <Link to={'/profile'}>
+  <Link to={'./profile'}>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
