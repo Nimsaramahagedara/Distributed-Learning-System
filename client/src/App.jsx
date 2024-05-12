@@ -18,10 +18,11 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route path='*' element={<NotFound />} />
+          <Route path='/' element={<Login />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/SignUp' element={<Signup />} />
           <Route path='' element={<Dashboard />} >
-            <Route path='/' element={<Login />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/SignUp' element={<Signup/>}/>
+            
           </Route>
 
           <Route path='/admin' element={<Dashboard />}>
