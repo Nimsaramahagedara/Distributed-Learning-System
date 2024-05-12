@@ -23,6 +23,17 @@ app.get('/', async (req, res) => {
 })
 
 app.use('/', paymentRouter)
+
+
+app.get('*', async (req, res) => {
+    try {
+        res.status(200).json({ message: '404'})
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+
+})
+
 dbConfig().then(()=>{
     app.listen(PORT, () => {
         console.log(`Payment Service Started on port `, PORT);
