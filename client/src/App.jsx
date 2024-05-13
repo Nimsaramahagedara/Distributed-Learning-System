@@ -10,8 +10,8 @@ import UserProfile from './pages/common/UserProfile';
 
 import LearnerHome from './pages/learner/Home';
 import AdminHome from './pages/admin/Home';
-import InstructorHome from './pages/instructor/Home';
-// import InstructorHome from './pages/instructor/home1';
+// import InstructorHome from './pages/instructor/Home';
+import InstructorHome from './pages/instructor/home1';
 import AddCourses from './pages/instructor/AddCourses';
 import CourseViewPage from './pages/learner/CourseViewPage';
 import PaymentSuccess from './pages/common/PaymentSuccess';
@@ -22,14 +22,13 @@ export default function App() {
       <ToastContainer autoClose={1000} />
       <AuthProvider>
         <Routes>
-
           <Route path='*' element={<NotFound />} />
           <Route path='/' element={<Login />} />
-          <Route path='/payment-done' element={<PaymentSuccess/>}/>
+          <Route path='/payment-done' element={<PaymentSuccess />} />
           <Route path='/login' element={<Login />} />
           <Route path='/SignUp' element={<Signup />} />
           <Route path='' element={<Dashboard />} >
-            
+
           </Route>
 
           <Route path='/admin' element={<Dashboard />}>
@@ -43,7 +42,7 @@ export default function App() {
             <Route path='home' element={<InstructorHome />} />
             <Route path='profile' element={<UserProfile />} />
             <Route path='content/:courseId' element={<Content />} />
-            <Route path='addcourses' element={<AddCourses/>}/>
+            <Route path='addcourses' element={<AddCourses />} />
           </Route>
 
           <Route path='/learner' element={<Dashboard />}>
@@ -52,7 +51,7 @@ export default function App() {
             <Route path='profile' element={<UserProfile />} />
             <Route path='course/:id' element={<CourseViewPage />} />
           </Route>
-          
+
         </Routes>
       </AuthProvider>
     </BrowserRouter>

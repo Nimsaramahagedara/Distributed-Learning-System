@@ -6,6 +6,7 @@ import authAxios from '../../utils/authAxios';
 export default function Content() {
     const { courseId } = useParams();
     const [Course, setCourse] = useState({});
+    const [contents, setContents] = useState([]);
     
   useEffect(() => {
     const getCourseData = async () => {
@@ -18,7 +19,18 @@ export default function Content() {
       }
     };
 
+    const getContents = async () => {
+        try {
+          const response = await authAxios.get(`${apiUrl}/course/content/course/66405f50c4ebb621ab3e2542`);
+          setContents(response);
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
     getCourseData();
+    getContents();
   }, []);
 
 
