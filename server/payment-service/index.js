@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import paymentRouter from './routes/paymentRouter.js'
 import { dbConfig } from './utils/dbConfig.js'
+import { loginValidator } from './middlewares/loginValidator.js'
 
 
 const app = express()
@@ -22,7 +23,7 @@ app.get('/', async (req, res) => {
 
 })
 
-app.use('/', paymentRouter)
+app.use('/' ,paymentRouter)
 
 
 app.get('*', async (req, res) => {

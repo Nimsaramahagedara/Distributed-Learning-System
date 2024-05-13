@@ -7,8 +7,8 @@ const stripe = new Stripe(apiKey);
 export const createPayment = async(uid,productId,qty, price,name)=>{
 
     const session = await stripe.checkout.sessions.create({
-        success_url: `${process.env.SELF_ADDRESS}/pay/paymentSuccess?uid=${uid}&productId=${productId}&qty=${qty}&price=${price}&name=${name}`,
-        cancel_url : `${process.env.SELF_ADDRESS}/pay/paymentFail`,     
+        success_url: `${process.env.SELF_ADDRESS}/paymentSuccess?uid=${uid}&productId=${productId}&qty=${qty}&price=${price}&name=${name}`,
+        cancel_url : `${process.env.SELF_ADDRESS}/paymentFail`,     
         line_items: [
             {
                 price_data: {

@@ -5,13 +5,13 @@ export const getPayment = async (req, res) => {
     try {
         const data = req.body;
         console.log(data);
-        if (!data?.userId || !data?.productId, !data?.qty || !data?.name || !data?.price) {
+        if (!data?.userid || !data?.productId, !data?.qty || !data?.name || !data?.price) {
             throw Error('required fields are missing {userId,productId,name,price,qty }')
         }
 
-        const payUrl = await createPayment(data.userId, data.productId, data.qty, data.price, data.name)
+        const payUrl = await createPayment(data.userid, data.productId, data.qty, data.price, data.name)
 
-        res.redirect(payUrl);
+        res.status(200).json({payUrl : payUrl});
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -19,6 +19,7 @@ export const getPayment = async (req, res) => {
 
 export const payementSuccess = async (req, res) => {
     try {
+        console.log('creating transaction...');
         const txdata = {
             userId: req?.query?.uid,
             productId: req?.query?.productId,
@@ -28,7 +29,9 @@ export const payementSuccess = async (req, res) => {
         }
 
         const tx = await createTransaction(txdata)
-        const clientPaySucUrl = process.env.CLIENT_ADDRESS + '/payement-done'
+        console.log(tx);
+        console.log( process.env.CLIENT_ADDRESS);
+        const clientPaySucUrl = process.env.CLIENT_ADDRESS + '/payment-done'
         res.redirect(clientPaySucUrl);
     } catch (error) {
         res.status(500).json({ message: error.message })

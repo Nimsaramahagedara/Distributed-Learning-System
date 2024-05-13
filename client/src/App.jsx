@@ -10,18 +10,23 @@ import UserProfile from './pages/common/UserProfile';
 
 import LearnerHome from './pages/learner/Home';
 import AdminHome from './pages/admin/Home';
-import InstructorHome from './pages/instructor/Home';
+import InstructorHome from './pages/instructor/home1';
+import CourseViewPage from './pages/learner/CourseViewPage';
+import PaymentSuccess from './pages/common/PaymentSuccess';
 export default function App() {
   return (
     <BrowserRouter>
       <ToastContainer autoClose={1000} />
       <AuthProvider>
         <Routes>
+
           <Route path='*' element={<NotFound />} />
+          <Route path='/' element={<Login />} />
+          <Route path='/payment-done' element={<PaymentSuccess/>}/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/SignUp' element={<Signup />} />
           <Route path='' element={<Dashboard />} >
-            <Route path='/' element={<Login />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/SignUp' element={<Signup/>}/>
+            
           </Route>
 
           <Route path='/admin' element={<Dashboard />}>
@@ -40,7 +45,9 @@ export default function App() {
             <Route path='' element={<LearnerHome />} />
             <Route path='home' element={<LearnerHome />} />
             <Route path='profile' element={<UserProfile />} />
+            <Route path='course/:id' element={<CourseViewPage />} />
           </Route>
+          
         </Routes>
       </AuthProvider>
     </BrowserRouter>

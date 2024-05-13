@@ -33,7 +33,7 @@ const UserProfile = () => {
 
   const getUserDetails = async () => {
     try {
-      const response = await authAxios.get(`${apiUrl}/get-user`);
+      const response = await authAxios.get(`${apiUrl}/user/loggedInUser`);
       setUser(response.data);
       setIsLoading(false);
     } catch (error) {
