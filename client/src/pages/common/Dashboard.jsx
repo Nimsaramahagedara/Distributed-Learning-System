@@ -253,13 +253,13 @@ export default function Dashboard() {
             onClose={handleCloseUserMenu}
           >
             <MenuItem>
-              <Typography textAlign="center" Disabled >{user.firstName} {user.lastName}</Typography>
+              <Typography textAlign="center"  >{user.firstName} {user.lastName}</Typography>
             </MenuItem>
             <MenuItem onClick={() => navigate('profile')}>
-              <Typography textAlign="center" Disabled >Profile</Typography>
+              <Typography textAlign="center"  >Profile</Typography>
             </MenuItem>
             <MenuItem onClick={() => logout()}>
-              <Typography textAlign="center" Disabled >Logout</Typography>
+              <Typography textAlign="center"  >Logout</Typography>
             </MenuItem>
           </Menu>
         </AppBar>
