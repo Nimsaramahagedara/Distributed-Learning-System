@@ -30,14 +30,6 @@ export const instructorListItems = (
       <ListItemText primary="My Courses" />
     </ListItemButton>
   </Link>
-  <Link to={'/instruct/content'}>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Manage Content" />
-    </ListItemButton>
-  </Link>
   <Link to={'/instruct/enrollemnts'}>
     <ListItemButton>
       <ListItemIcon>

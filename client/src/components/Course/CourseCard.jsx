@@ -10,7 +10,7 @@ const CourseCard = ({ course }) => {
     const navigate = useNavigate()
 
     return (
-        <Card sx={{ maxWidth: 320 }} onClick={()=>navigate(`./course/${course?._id}`)}>
+        <Card sx={{ maxWidth: 320 }} onClick={()=>navigate(`./content/${course?._id}`)}>
             <CardActionArea>
                 <CardMedia
                     component="img"
