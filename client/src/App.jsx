@@ -30,7 +30,7 @@ export default function App() {
             <Route path='profile' element={<UserProfile />} />
           </Route>
 
-          <Route path='/instructor' element={<Dashboard />}>
+          <Route path='/instruct' element={<Dashboard />}>
             <Route path='' element={<InstructorHome />} />
             <Route path='home' element={<InstructorHome />} />
             <Route path='profile' element={<UserProfile />} />

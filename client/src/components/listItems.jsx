@@ -22,7 +22,7 @@ export const adminListItems = (
 
 export const instructorListItems = (
   <React.Fragment>
-  <Link to={'/instructor'}>
+  <Link to={'/instruct'}>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
@@ -30,7 +30,7 @@ export const instructorListItems = (
       <ListItemText primary="My Courses" />
     </ListItemButton>
   </Link>
-  <Link to={'/instructor/content'}>
+  <Link to={'/instruct/content'}>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />
@@ -38,7 +38,7 @@ export const instructorListItems = (
       <ListItemText primary="Manage Content" />
     </ListItemButton>
   </Link>
-  <Link to={'/instructor/enrollemnts'}>
+  <Link to={'/instruct/enrollemnts'}>
     <ListItemButton>
       <ListItemIcon>
         <DashboardIcon />

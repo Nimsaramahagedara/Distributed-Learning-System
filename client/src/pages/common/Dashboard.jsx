@@ -142,9 +142,9 @@ export default function Dashboard() {
           setAuth(true);
         }
         break;
-      case "instructor": //Support
+      case "instruct": //Support
         if (userAPI != null) {
-          setuserAPI('instructor')
+          setuserAPI('instruct')
           setAuth(true);
         }
         setNavlinks(instructorListItems);
@@ -212,7 +212,7 @@ export default function Dashboard() {
             >
               {
                 userRole == 'admin' ? 'Admin' :
-                  userRole == 'instructor' ? 'Instructor' :
+                  userRole == 'instruct' ? 'Instruct' :
                     userRole == 'learner' ? 'Learner' :
                       'Online Learning Platform'
               }

@@ -86,6 +86,8 @@ const InstructorHome = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const user = await authAxios.get(`${apiUrl}/user/loggedInUser`);
+        console.log(user.data._id);
         const response = await fetch(`${apiUrl}/course/`);
         const data = await response.json();
         setNotices(data);
