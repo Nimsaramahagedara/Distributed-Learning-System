@@ -6,330 +6,218 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Radio,
-  FormControlLabel,
-  FormGroup,
+  Box
 } from '@mui/material';
 
-import DeleteIcon from '@mui/icons-material/Delete';
-import SaveIcon from '@mui/icons-material/Save';
-import CancelIcon from '@mui/icons-material/Cancel';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { apiUrl } from '../../utils/Constants';
 import { toast } from 'react-toastify';
 import authAxios from '../../utils/authAxios';
-
-// Additional imports
-import { RadioGroup, FormLabel } from '@mui/material';
 import Loader from '../../components/Loader/Loader';
+import MainCarousel from '../../components/Carousel/MainCarousel';
+import CourseCard from '../../components/Course/CourseCard';
 
 const InstructorHome = () => {
 
-  const publishedBy = "admin";
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const [open2, setOpen2] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  const [notices, setNotices] = useState([]);
+  const [Courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [newNotice, setNewNotice] = useState({
-    instructorId: 'gg',
+
+  const [newCourse, setNewCourse] = useState({
+    instructorId: '',
     name: '',
     id: '',
     description: '',
-    fee: '',
-    publishedBy: publishedBy,
+    fee: ''
   });
 
+  useEffect(() => {
+    const getUserDetails = async () => {
+      try {
+        const response = await authAxios.get(`${apiUrl}/user/loggedInUser`);
+        setUser(response.data._id);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  const [updateFormData, setUpdateFormData] = useState({
-    _id: '',
-    name: '',
-    id: '',
-    description: '',
-    fee: '',
-  });
+    getUserDetails();
+  }, []);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleClose2 = () => {
-    setOpen2(false);
-  };
-
-  const handleUpdateNotice = (row) => {
-    setOpen2(true);
-    setUpdateFormData({
-      _id: row._id,
-      name: row.name,
-      description: row.description,
-      fee: row.fee,
-    });
-  };
-
-  const refreshPage = () => {
-    setRefresh((prev) => !prev);
-  };
+  useEffect(() => {
+    if (user) {
+      setNewCourse(prevCourse => ({
+        ...prevCourse,
+        instructorId: user
+      }));
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const user = await authAxios.get(`${apiUrl}/user/loggedInUser`);
-        console.log(user.data._id);
-        const response = await fetch(`${apiUrl}/course/`);
-        const data = await response.json();
-        setNotices(data);
-        setIsLoading(false);
+        if (user) {
+          const response = await fetch(`${apiUrl}/course/instructor/${user}`);
+          const data = await response.json();
+          setCourses(data);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [refresh]);
+  }, [user, refresh]);
 
-  const handleCreateNotice = (field, value) => {
-    setNewNotice((prevData) => ({ ...prevData, [field]: value }));
+  const handleCreateCourse = (field, value) => {
+    setNewCourse(prevData => ({ ...prevData, [field]: value }));
   };
 
-  // Use this function to handle changes in checkboxes
-  const handleCheckboxChange = (field, value) => {
-    setNewNotice((prevData) => ({ ...prevData, [field]: value }));
-  };
-
-  const publishNotice = async () => {
+  const publishCourse = async () => {
     try {
       const result = await fetch(`${apiUrl}/course/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newNotice),
+        body: JSON.stringify(newCourse),
       });
+
       const data = await result.json();
 
       if (result.ok) {
-        console.log('Notice Published successfully:', data);
         toast.success(data.message);
-        refreshPage();
+        setRefresh(prev => !prev); // Refresh data
         handleClose();
       } else {
-        console.error('Error creating teacher:', data.message);
+        console.error('Error creating course:', data.message);
         toast.error(data.message);
       }
     } catch (error) {
-      console.error('Error creating teacher:', error);
-      toast.error('An error occurred while creating the teacher.');
+      console.error('Error creating course:', error);
+      toast.error('An error occurred while creating the course.');
     }
   };
 
-  const handleDeleteNotice = async (id) => {
-    try {
-      const result = await authAxios.delete(`${apiUrl}/course/${id}`);
-
-      if (result) {
-        handleClose2();
-        toast.warning('Notice Deleted Successfully');
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
-    } finally {
-      refreshPage();
-    }
+  const handleClose = () => {
+    setOpen(false);
   };
 
-  const handleUpdate = async () => {
-    try {
-      const result = await authAxios.put(`${apiUrl}/course/${updateFormData._id}`, updateFormData);
-
-      if (result) {
-        toast.success('Notice Updated Successfully');
-        handleClose2();
-        refreshPage();
-      }
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Create Course
-      </Button>
-      <React.Fragment>
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Publish a Notice</DialogTitle>
-          <DialogContent>
-            <Box
-              component="form"
-              sx={{
-                '& .MuiTextField-root': {
-                  m: 1,
-                  width: 500,
-                  maxWidth: '100%',
-                },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <div>
-                <TextField
-                  id="notice-title"
-                  label="Course Id"
-                  fullWidth
-                  onChange={(e) => handleCreateNotice('id', e.target.value)}
-                  value={newNotice.id}
-                />
-              </div>
-              <div>
-                <TextField
-                  id="notice-title"
-                  label="Name"
-                  fullWidth
-                  onChange={(e) => handleCreateNotice('name', e.target.value)}
-                  value={newNotice.name}
-                />
-              </div>
-              <div>
-                <TextField
-                  id="notice-discription"
-                  label="Discription"
-                  multiline
-                  rows={4}
-                  fullWidth
-                  onChange={(e) => handleCreateNotice('description', e.target.value)}
-                  value={newNotice.description}
-                />
-              </div>
-              <div>
-                <TextField
-                  id="notice-title"
-                  label="Fee"
-                  fullWidth
-                  type='number'
-                  onChange={(e) => handleCreateNotice('fee', e.target.value)}
-                  value={newNotice.fee}
-                />
-              </div>
-            </Box>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={publishNotice} variant='outlined'>Publish</Button>
-            <Button onClick={handleClose} variant='outlined'>Cancel</Button>
-          </DialogActions>
-        </Dialog>
-      </React.Fragment>
+    <div className='w-full'>
+      <div className='flex items-stretch justify-center bg-white p-5 border rounded-xl gap-5'>
+        <MainCarousel>
+          <div>
+            <img src="https://img.freepik.com/free-psd/e-learning-online-courses-banner-template_23-2149109791.jpg" />
+          </div>
+          <div>
+            <img src="https://www.shutterstock.com/image-illustration/business-training-courses-concept-can-260nw-1483009133.jpg" />
+          </div>
+          <div>
+            <img src="https://t3.ftcdn.net/jpg/04/01/36/86/360_F_401368641_nEdHMBlrlmyW09cBtm4lvb83EtN7Gx5t.jpg" />
+          </div>
+        </MainCarousel>
+        <div className='w-full bg-white'>
+          <h1 className='text-2xl font-semibold'>Online Learning Portal</h1>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleClickOpen}
+          >
+            Add Course
+          </Button>
+          <React.Fragment>
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Publish a Course</DialogTitle>
+              <DialogContent>
+                <Box
+                  component="form"
+                  sx={{
+                    '& .MuiTextField-root': {
+                      m: 1,
+                      width: 500,
+                      maxWidth: '100%',
+                    },
+                  }}
+                  noValidate
+                  autoComplete="off"
+                >
+                  <div>
+                    <TextField
+                      id="Course-title"
+                      label="Course Id"
+                      fullWidth
+                      onChange={(e) => handleCreateCourse('id', e.target.value)}
+                      value={newCourse.id}
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      id="Course-title"
+                      label="Name"
+                      fullWidth
+                      onChange={(e) => handleCreateCourse('name', e.target.value)}
+                      value={newCourse.name}
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      id="Course-discription"
+                      label="Discription"
+                      multiline
+                      rows={4}
+                      fullWidth
+                      onChange={(e) => handleCreateCourse('description', e.target.value)}
+                      value={newCourse.description}
+                    />
+                  </div>
+                  <div>
+                    <TextField
+                      id="Course-title"
+                      label="Fee"
+                      fullWidth
+                      type='number'
+                      onChange={(e) => handleCreateCourse('fee', e.target.value)}
+                      value={newCourse.fee}
+                    />
+                  </div>
+                </Box>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={publishCourse} variant='outlined'>Publish</Button>
+                <Button onClick={handleClose} variant='outlined'>Cancel</Button>
+              </DialogActions>
+            </Dialog>
+          </React.Fragment>
+        </div>
+      </div>
 
-      {!isLoading ?
-        <TableContainer component={Paper} style={{ marginTop: '20px' }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>No</TableCell>
-                <TableCell>ID</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Discription</TableCell>
-                <TableCell>Fee</TableCell>
-                <TableCell></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {notices.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.description}</TableCell>
-                  <TableCell>{row.fee}</TableCell>
-                  <TableCell>
-                    <Button variant="outlined" startIcon={<VisibilityIcon />} color="secondary"
-                      onClick={() => handleUpdateNotice(row)}
-                      sx={{ marginRight: 2 }}
-                    > View </Button>
-
-                    <Dialog open={open2} onClose={handleClose2} sx={{ border: '2px solid #ccc' }}>
-                      <DialogTitle sx={{ textAlign: 'center' }}>Edit Notice</DialogTitle>
-                      <DialogContent>
-                        <div>
-                          <TextField
-                            required
-                            id="outlined-read-only-input"
-                            label="ID"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            onChange={(e) => setUpdateFormData({ ...updateFormData, id: e.target.value })}
-                            value={updateFormData.id}
-                          />
-
-                          <TextField
-                            required
-                            id="outlined-read-only-input"
-                            label="Title"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            onChange={(e) => setUpdateFormData({ ...updateFormData, name: e.target.value })}
-                            value={updateFormData.name}
-                          />
-
-                          <TextField
-                            required
-                            id="outlined-required"
-                            label="Price"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            onChange={(e) => setUpdateFormData({ ...updateFormData, description: e.target.value })}
-                            value={updateFormData.description}
-                            multiline
-                            rows={4}
-                          />
-
-                          <TextField
-                            required
-                            id="outlined-read-only-input"
-                            label="Fee"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            onChange={(e) => setUpdateFormData({ ...updateFormData, fee: e.target.value })}
-                            value={updateFormData.fee}
-                          />
-                        </div>
-                        <DialogActions style={{ justifyContent: 'center' }}>
-                          <Button size="small" startIcon={<SaveIcon />} onClick={handleUpdate} variant="contained" color="primary">
-                            Update
-                          </Button>
-
-                          <Button size="small" startIcon={<DeleteIcon />} variant="contained" color="error" onClick={() => handleDeleteNotice(updateFormData._id)}>
-                            Remove
-                          </Button>
-                          <Button size="small" startIcon={<CancelIcon />} variant='outlined' onClick={handleClose2}>Cancel</Button>
-                        </DialogActions>
-                      </DialogContent>
-                    </Dialog>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        : <Loader />
-      }
+      <div className='text-xl font-semibold my-5'>
+        <h1 className='my-5'>Your Courses</h1>
+        {!isLoading ?
+          <div className='w-full overflow-x-scroll'>
+            <div className='flex items-center justify-start gap-5 w-max py-10'>
+              {Courses.length > 0 ? (
+                Courses.slice(0, 10).map((c) => (
+                  <CourseCard key={c._id} course={c} />
+                ))
+              ) : (
+                <p>No courses available</p>
+              )}
+            </div>
+          </div>
+          : <Loader />
+        }
+      </div>
     </div>
   )
 }

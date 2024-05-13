@@ -10,9 +10,10 @@ import UserProfile from './pages/common/UserProfile';
 
 import LearnerHome from './pages/learner/Home';
 import AdminHome from './pages/admin/Home';
-import InstructorHome from './pages/instructor/home1';
+import InstructorHome from './pages/instructor/Home';
 import CourseViewPage from './pages/learner/CourseViewPage';
 import PaymentSuccess from './pages/common/PaymentSuccess';
+import Content from './pages/instructor/Content';
 export default function App() {
   return (
     <BrowserRouter>
@@ -39,6 +40,7 @@ export default function App() {
             <Route path='' element={<InstructorHome />} />
             <Route path='home' element={<InstructorHome />} />
             <Route path='profile' element={<UserProfile />} />
+            <Route path='content/:courseId' element={<Content />} />
           </Route>
 
           <Route path='/learner' element={<Dashboard />}>
