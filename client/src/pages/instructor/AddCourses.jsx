@@ -61,7 +61,7 @@ export default function Home() {
         const isCourseAdd = await axios.post(`${apiUrl}/course`, payload);
         if(isCourseAdd){
             toast.success("Course Successfully Added");
-            navigate("/instructor");
+            navigate("/instruct");
         }
       } catch (error) {
         if (error.message) {

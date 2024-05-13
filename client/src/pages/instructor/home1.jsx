@@ -82,7 +82,7 @@ export default function Home() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={(e)=>{navigate("/instructor/addcourses");}}
+            onClick={(e)=>{navigate("/instruct/addcourses");}}
           >
             Add Course
           </Button>
