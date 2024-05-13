@@ -16,6 +16,9 @@ import AddCourses from './pages/instructor/AddCourses';
 import CourseViewPage from './pages/learner/CourseViewPage';
 import PaymentSuccess from './pages/common/PaymentSuccess';
 import Content from './pages/instructor/Content';
+import { Search } from '@material-ui/icons';
+import Transactions from './pages/learner/Transactions';
+import MyProgress from './pages/learner/MyProgress';
 export default function App() {
   return (
     <BrowserRouter>
@@ -47,6 +50,9 @@ export default function App() {
 
           <Route path='/learner' element={<Dashboard />}>
             <Route path='' element={<LearnerHome />} />
+            <Route path='search' element={<Search />} />
+            <Route path='transactions' element={<Transactions />} />
+            <Route path='my-learning' element={<MyProgress />} />
             <Route path='home' element={<LearnerHome />} />
             <Route path='profile' element={<UserProfile />} />
             <Route path='course/:id' element={<CourseViewPage />} />
