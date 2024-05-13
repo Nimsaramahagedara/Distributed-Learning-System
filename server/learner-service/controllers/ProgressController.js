@@ -1,8 +1,15 @@
 import ProgressModel from "../models/ProgressModel.js";
-
+import axios from  'axios'
 export const createProgress = async (req, res) => {
     try {
-        const course = await ProgressModel.create(req.body);
+        const data = req.body;
+        const content = await axios.get(`${process.env.GATEWAY_ADDRESS}/course/content/course/${data?.courseId}`)
+        console.log(content.data);
+        const updatedProgress = {
+            ...data,
+            contents:content.data
+        }
+        const course = await ProgressModel.create(updatedProgress);
          res.status(200).json(course);
     } catch (error) {
         console.error(error); 

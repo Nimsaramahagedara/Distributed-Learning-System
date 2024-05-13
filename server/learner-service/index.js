@@ -13,6 +13,15 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
 
+app.get('/', async (req, res) => {
+    try {
+        res.status(200).json({ message: 'Learner Server is up and running on port ' + port })
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
+
+})
+
 //Progress Routes
 app.use('/', progressRouter);
 
