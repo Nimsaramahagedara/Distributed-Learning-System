@@ -150,7 +150,7 @@ export default function Dashboard() {
         }
         setNavlinks(instructorListItems);
         break;
-      case "learner": //Support
+      case "user": //Support
         if (userAPI != null) {
           setuserAPI('learner')
           setAuth(true);
@@ -162,7 +162,7 @@ export default function Dashboard() {
       //   navigate("/");
     }
 
-  }, []);
+  }, [userRole]);
 
   const getUserDetails = async () => {
     try {
