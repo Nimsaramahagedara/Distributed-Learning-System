@@ -110,8 +110,8 @@ export default function Dashboard() {
 
   const navigate = useNavigate();
   const [navLinks, setNavlinks] = useState();
-  // const { logout, userRole } = useAuth();
-  const userRole = "learner"
+  const { logout, userRole } = useAuth();
+  // const userRole = "learner"
   const [open, setOpen] = React.useState(true);
   const [userAPI, setuserAPI] = useState('');
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -143,7 +143,7 @@ export default function Dashboard() {
           setAuth(true);
         }
         break;
-      case "instructor": //Support
+      case "instruct": //Support
         if (userAPI != null) {
           setuserAPI('instructor')
           setAuth(true);
@@ -213,7 +213,7 @@ export default function Dashboard() {
             >
               {
                 userRole == 'admin' ? 'Admin' :
-                  userRole == 'instructor' ? 'Instructor' :
+                  userRole == 'instruct' ? 'Instructor' :
                     userRole == 'learner' ? 'Learner' :
                       'Online Learning Platform'
               }

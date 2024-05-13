@@ -40,7 +40,7 @@ export default function Login() {
             toast.success("Login Success as an Admin");
             navigate("/admin");
             break;
-          case "instructor": //instructor
+          case "instruct": //instructor
             toast.success("Login Success as a Instructor");
             navigate("/instructor");
             break;

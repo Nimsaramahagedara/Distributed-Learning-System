@@ -10,7 +10,7 @@ import UserProfile from './pages/common/UserProfile';
 
 import LearnerHome from './pages/learner/Home';
 import AdminHome from './pages/admin/Home';
-import InstructorHome from './pages/instructor/Home';
+import InstructorHome from './pages/instructor/home1';
 import CourseViewPage from './pages/learner/CourseViewPage';
 import PaymentSuccess from './pages/common/PaymentSuccess';
 export default function App() {
