@@ -57,7 +57,7 @@ export default function App() {
             <Route path='my-learning' element={<MyProgress />} />
             <Route path='home' element={<LearnerHome />} />
             <Route path='profile' element={<UserProfile />} />
-            <Route path='course/:id' element={<CourseViewPage />} />
+            <Route path='content/:id' element={<CourseViewPage />} />
           </Route>
 
         </Routes>

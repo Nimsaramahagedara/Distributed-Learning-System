@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import { apiUrl } from '../../utils/Constants';
 import authAxios from '../../utils/authAxios';
 import {
@@ -30,6 +30,7 @@ import Loader from '../../components/Loader/Loader';
 
 export default function Content() {
   const { courseId } = useParams();
+  const navigate = useNavigate()
   const [Course, setCourse] = useState({});
   const [contents, setContents] = useState([]);
   const [open, setOpen] = useState(false);
@@ -167,6 +168,9 @@ export default function Content() {
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
         Add Content
+      </Button>
+      <Button variant="outlined" onClick={()=>navigate(`/instruct/course/${courseId}`)}>
+      Manage Course
       </Button>
       {!isLoading ? <>
         <React.Fragment>
