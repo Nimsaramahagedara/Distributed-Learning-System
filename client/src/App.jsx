@@ -12,6 +12,7 @@ import LearnerHome from './pages/learner/Home';
 import AdminHome from './pages/admin/Home';
 // import InstructorHome from './pages/instructor/Home';
 import InstructorHome from './pages/instructor/home1';
+import ViewCourse from './pages/instructor/ViewCourse';
 import AddCourses from './pages/instructor/AddCourses';
 import CourseViewPage from './pages/learner/CourseViewPage';
 import PaymentSuccess from './pages/common/PaymentSuccess';
@@ -46,6 +47,7 @@ export default function App() {
             <Route path='profile' element={<UserProfile />} />
             <Route path='content/:courseId' element={<Content />} />
             <Route path='addcourses' element={<AddCourses />} />
+            <Route path='course/:id' element={<ViewCourse/>}/>
           </Route>
 
           <Route path='/learner' element={<Dashboard />}>
