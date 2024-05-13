@@ -5,8 +5,10 @@ import MainCarousel from '../../components/Carousel/MainCarousel';
 import authAxios from '../../utils/authAxios';
 import { apiUrl } from '../../utils/Constants';
 import CourseCard from '../../components/Course/CourseCard';
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+    const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -80,6 +82,7 @@ export default function Home() {
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={(e)=>{navigate("/instructor/addcourses");}}
           >
             Add Course
           </Button>
