@@ -10,7 +10,7 @@ import {
 
 const contentRouter = express.Router();
 
-contentRouter.get('/all', getAllContent);
+contentRouter.get('/', getAllContent);
 contentRouter.get('/:id', getContentById);
 contentRouter.get('/course/:id', getContentByCourseId);
 contentRouter.post('/', createContent);

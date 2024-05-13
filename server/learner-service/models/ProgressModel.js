@@ -11,13 +11,24 @@ const ProgressSchema = new mongoose.Schema({
     },
     contents:[
         {
+            _id:String,
+
             contentId:{
                 type:String,
             },
             status:{
                 type:Boolean,
                 default:false
-            }
+            },
+            title: String,
+            description: String,
+            file: String,
+            status: {
+                type:Boolean,
+                default:false
+            },
+            createdAt: Date,
+            updatedAt: Date,
         }
     ],
     status:{

@@ -1,6 +1,6 @@
 import { createTransaction, getAllTx, getAllUTx } from "../repository/transactionRepository.js";
 import { createPayment } from "../utils/paymentService.js";
-
+import axios from 'axios'
 export const getPayment = async (req, res) => {
     try {
         const data = req.body;
@@ -29,8 +29,13 @@ export const payementSuccess = async (req, res) => {
         }
 
         const tx = await createTransaction(txdata)
-        console.log(tx);
-        console.log( process.env.CLIENT_ADDRESS);
+        const enrollment = {
+            courseId: tx?.productId,
+            userid:tx?.userId,
+        }
+        const resp = await axios.post(`${process.env.GATEWAY_ADDRESS}/learn`,enrollment)
+        // console.log(tx);
+        // console.log( process.env.CLIENT_ADDRESS);
         const clientPaySucUrl = process.env.CLIENT_ADDRESS + '/payment-done'
         res.redirect(clientPaySucUrl);
     } catch (error) {

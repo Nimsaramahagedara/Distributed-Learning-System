@@ -10,7 +10,7 @@ import {
 
 const progressRouter = express.Router();
 
-progressRouter.get('/', getMyProgress);
+progressRouter.get('/all', getMyProgress);
 progressRouter.get('/:id', getCourseById);
 progressRouter.get('/instructor/:id', getCourseByInstructorId);
 progressRouter.post('/', createProgress);
