@@ -31,7 +31,7 @@ export const payementSuccess = async (req, res) => {
         const tx = await createTransaction(txdata)
         const enrollment = {
             courseId: tx?.productId,
-            userid:tx?.userId,
+            userId:tx?.userId,
         }
         const resp = await axios.post(`${process.env.GATEWAY_ADDRESS}/learn`,enrollment)
         // console.log(tx);

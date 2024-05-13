@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import authAxios from '../../utils/authAxios';
 import { apiUrl } from '../../utils/Constants';
 import { Button } from '@mui/material';
@@ -8,12 +8,15 @@ import { toast } from 'react-toastify';
 const CourseViewPage = () => {
     const { id } = useParams()
     const [course, setCourse] = useState({});
+    const [content, setContent] = useState([])
 
     const getOneCourse = async () => {
         try {
             const resp = await authAxios.get(`${apiUrl}/course/${id}`);
+            const content = await authAxios.get(`${apiUrl}/course/content/course/${id}`)
             console.log(resp.data);
             setCourse(resp.data)
+            setContent(content.data)
         } catch (error) {
             console.log(error);
         }
@@ -30,7 +33,7 @@ const CourseViewPage = () => {
             console.log(resp.data);
             if (resp?.data?.payUrl) {
                 window.location.href = resp.data.payUrl
-            }else{
+            } else {
                 throw Erro('Error creating paylink')
             }
 
@@ -68,6 +71,23 @@ const CourseViewPage = () => {
 
 
 
+            </div>
+            <div>
+                <h1 className='text-2xl font-semibold'>Course Content</h1>
+
+                <div>
+                    {
+                        content.map((c) => (
+                            <div className={`flex items-center justify-between px-4 py-2 border rounded-xl my-2 hover:bg-gray-200 ${ c?.status ? '' : 'hidden'}`}>
+                                <span className='text-xl font-bold'> {c.title}</span>
+                                {
+                                    c?.description
+                                }
+                                <Link to={c?.file} target='_blank'>File</Link>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )
