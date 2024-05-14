@@ -45,7 +45,8 @@ export const payementSuccess = async (req, res) => {
 
 export const getAllUserTx = async (req, res) => {
     try {
-        const tx = await getAllUTx(req.params.uid)
+        const {userid} = req.body
+        const tx = await getAllUTx(userid)
         res.status(200).json(tx)
     } catch (error) {
         res.status(500).json({ message: error.message })

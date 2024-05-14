@@ -7,7 +7,7 @@ const paymentRouter = express.Router()
 paymentRouter.get('/all',getAllTxs)
 paymentRouter.get('/paymentSuccess',payementSuccess)
 paymentRouter.get('/paymentFail',payFail)
-paymentRouter.get('/:id',getAllUserTx)
+paymentRouter.get('/my',loginValidator,getAllUserTx)
 paymentRouter.post('/',loginValidator,getPayment)
 
 
