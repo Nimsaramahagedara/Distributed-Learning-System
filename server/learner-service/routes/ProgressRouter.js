@@ -7,10 +7,11 @@ import {
     deleteCourse,
     getCourseByInstructorId
  } from '../controllers/ProgressController.js';
+import { loginValidator } from '../middlewares/loginValidator.js';
 
 const progressRouter = express.Router();
 
-progressRouter.get('/all', getMyProgress);
+progressRouter.get('/all',loginValidator, getMyProgress);
 progressRouter.get('/:id', getCourseById);
 progressRouter.get('/instructor/:id', getCourseByInstructorId);
 progressRouter.post('/', createProgress);

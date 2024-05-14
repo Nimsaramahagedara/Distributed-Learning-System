@@ -9,6 +9,7 @@ paymentRouter.get('/paymentSuccess',payementSuccess)
 paymentRouter.get('/paymentFail',payFail)
 paymentRouter.get('/:uid',getAllUserTx)
 paymentRouter.get('/course/:cid',getAllCourseTx)
+paymentRouter.get('/my',loginValidator,getAllUserTx)
 paymentRouter.post('/',loginValidator,getPayment)
 
 

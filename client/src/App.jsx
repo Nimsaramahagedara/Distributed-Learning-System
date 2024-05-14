@@ -12,6 +12,7 @@ import LearnerHome from './pages/learner/Home';
 import AdminHome from './pages/admin/Home';
 // import InstructorHome from './pages/instructor/Home';
 import InstructorHome from './pages/instructor/home1';
+import ViewCourse from './pages/instructor/ViewCourse';
 import AddCourses from './pages/instructor/AddCourses';
 import CourseViewPage from './pages/learner/CourseViewPage';
 import PaymentSuccess from './pages/common/PaymentSuccess';
@@ -52,7 +53,7 @@ export default function App() {
             <Route path='courses' element={<Courses />} />
             <Route path='courses/learnerlist/:courseId' element={<LearnerList />} />
             <Route path='courses/learnerprogress/:lernerId' element={<LearnerProgress />} />
-
+            <Route path='course/:id' element={<ViewCourse/>}/>
           </Route>
 
           <Route path='/learner' element={<Dashboard />}>
@@ -62,7 +63,7 @@ export default function App() {
             <Route path='my-learning' element={<MyProgress />} />
             <Route path='home' element={<LearnerHome />} />
             <Route path='profile' element={<UserProfile />} />
-            <Route path='course/:id' element={<CourseViewPage />} />
+            <Route path='content/:id' element={<CourseViewPage />} />
           </Route>
 
         </Routes>

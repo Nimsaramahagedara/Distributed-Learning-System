@@ -6,11 +6,11 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course, isEnrolled = false }) => {
     const navigate = useNavigate()
 
     return (
-        <Card sx={{ maxWidth: 320 }} onClick={()=>navigate(`./content/${course?._id}`)}>
+        <Card sx={{ maxWidth: 320 }} onClick={()=>navigate(`/learner/content/${course?._id}?${isEnrolled ? 'enroll=true' : 'enroll=false'}`)}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -28,7 +28,10 @@ const CourseCard = ({ course }) => {
                 </CardContent>
                 <CardActions>
                     <Button size="small" color="primary">
-                        Price : {course?.fee}
+                        {
+                            isEnrolled ? 'Enrolled' : `Price : ${course?.fee}`
+                        }
+          
                     </Button>
                 </CardActions>
             </CardActionArea>
