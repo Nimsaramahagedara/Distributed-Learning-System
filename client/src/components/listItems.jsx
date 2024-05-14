@@ -4,7 +4,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
-import { LocalBar, Store } from '@material-ui/icons';
+import { Book, LocalBar, Person, Store } from '@material-ui/icons';
 import { Liquor } from '@mui/icons-material';
 
 export const adminListItems = (
@@ -25,17 +25,17 @@ export const instructorListItems = (
   <Link to={'/instruct'}>
     <ListItemButton>
       <ListItemIcon>
-        <DashboardIcon />
+        <Book />
       </ListItemIcon>
       <ListItemText primary="My Courses" />
     </ListItemButton>
   </Link>
-  <Link to={'/instruct/enrollemnts'}>
+  <Link to={'./profile'}>
     <ListItemButton>
       <ListItemIcon>
-        <DashboardIcon />
+        <Person />
       </ListItemIcon>
-      <ListItemText primary="Enrollments" />
+      <ListItemText primary="Profile" />
     </ListItemButton>
   </Link>
   </React.Fragment>
