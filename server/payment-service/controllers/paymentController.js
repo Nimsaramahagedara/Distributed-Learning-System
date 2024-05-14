@@ -1,4 +1,4 @@
-import { createTransaction, getAllTx, getAllUTx } from "../repository/transactionRepository.js";
+import { createTransaction, getAllCTx, getAllTx, getAllUTx } from "../repository/transactionRepository.js";
 import { createPayment } from "../utils/paymentService.js";
 import axios from 'axios'
 export const getPayment = async (req, res) => {
@@ -44,9 +44,20 @@ export const payementSuccess = async (req, res) => {
 }
 
 export const getAllUserTx = async (req, res) => {
+    console.log(req.params.uid)
     try {
         const {userid} = req.body
         const tx = await getAllUTx(userid)
+        res.status(200).json(tx)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export const getAllCourseTx = async (req, res) => {
+    console.log(req.params.cid)
+    try {
+        const tx = await getAllCTx(req.params.cid)
         res.status(200).json(tx)
     } catch (error) {
         res.status(500).json({ message: error.message })
