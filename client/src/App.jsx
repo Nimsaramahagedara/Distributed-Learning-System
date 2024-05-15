@@ -1,3 +1,4 @@
+import React from 'react'
 import { AuthProvider } from './pages/common/AuthContext'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
@@ -23,6 +24,8 @@ import MyProgress from './pages/learner/MyProgress';
 import Courses from './pages/instructor/Courses';
 import LearnerList from './pages/instructor/LearnerList';
 import LearnerProgress from './pages/instructor/LearnerProgress';
+import Users from './pages/admin/users/Users';
+import Course from './pages/admin/course/Course';
 export default function App() {
   return (
     <BrowserRouter>
@@ -42,6 +45,8 @@ export default function App() {
             <Route path='' element={<AdminHome />} />
             <Route path='home' element={<AdminHome />} />
             <Route path='profile' element={<UserProfile />} />
+            <Route path='users' element={<Users />} />
+            <Route path='course' element={<Course />} />
           </Route>
 
           <Route path='/instruct' element={<Dashboard />}>

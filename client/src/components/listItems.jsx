@@ -4,8 +4,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
-import { Book, LocalBar, Person, PieChart, Store } from '@material-ui/icons';
-import { Liquor } from '@mui/icons-material';
+import { Book, ChromeReaderModeRounded, Person, PieChart } from '@material-ui/icons';
+import { SupervisedUserCircleTwoTone } from '@mui/icons-material';
 
 export const adminListItems = (
   <React.Fragment>
@@ -15,6 +15,22 @@ export const adminListItems = (
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="Home" />
+      </ListItemButton>
+    </Link>
+    <Link to={'/admin/users'}>
+      <ListItemButton>
+        <ListItemIcon>
+          <SupervisedUserCircleTwoTone />
+        </ListItemIcon>
+        <ListItemText primary="Users" />
+      </ListItemButton>
+    </Link>
+    <Link to={'/admin/course'}>
+      <ListItemButton>
+        <ListItemIcon>
+          <ChromeReaderModeRounded />
+        </ListItemIcon>
+        <ListItemText primary="Courses" />
       </ListItemButton>
     </Link>
   </React.Fragment>
