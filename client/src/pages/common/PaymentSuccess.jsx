@@ -27,11 +27,13 @@ const PaymentSuccess = () => {
 
   const sendSmsNotification = async (obj) => {
     try {
+      console.log(obj)
       const payload = {
-        to: "94"+obj.contactNo,
+        to: obj.email,
+        subject:"enrolled to course",
         text: "Your payment was successful and you are enrolled in the course",
       };
-      await authAxios.post(`${apiUrl}/notification/sendsms`, payload);
+      await authAxios.post(`${apiUrl}/notification/sendemail`, payload);
     } catch (error) {
       console.error(error);
       if (error.response && error.response.status === 404) {
