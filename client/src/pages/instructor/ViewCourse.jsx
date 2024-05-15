@@ -84,7 +84,7 @@ export default function Home() {
   return (
     <div className="w-full bg-white rounded-xl p-2">
       <div className="flex items-stretch justify-start gap-10">
-        <div className="w-1/2 aspect-square">
+        {/* <div className="w-1/2 aspect-square">
           <img
             src={
               editedCourse.image
@@ -93,7 +93,7 @@ export default function Home() {
             }
             className="w-full h-full object-cover"
           />
-        </div>
+        </div> */}
         <div className="w-full px-10">
           <input
             type="text"

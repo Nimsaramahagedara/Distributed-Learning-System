@@ -101,12 +101,6 @@ export default function Home() {
               courses.slice(0, 10).map((c) => (
                 <Card sx={{ maxWidth: 320 }} onClick={() => navigate(`./content/${c?._id}`)}>
                     <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="50"
-                        image={c?.image ? c.image : "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"}
-                        alt="green iguana"
-                      />
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
                           {c?.name}
