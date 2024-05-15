@@ -92,3 +92,16 @@ export const updateProgress = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const getProgressById = async (req, res) => {
+    const { id, cid } = req.params;
+    try {
+        const course = await ProgressModel.findOne({ userId: id, courseId: cid});
+        if (!course) {
+            return res.status(404).json({ error: "course not found" });
+        }
+        res.status(200).json(course);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

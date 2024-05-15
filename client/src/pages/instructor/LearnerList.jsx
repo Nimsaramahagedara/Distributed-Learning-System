@@ -9,9 +9,11 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import InboxIcon from '@mui/icons-material/Inbox';
+import { Typography } from '@mui/material';
 
 export default function LearnerList() {
   const { courseId } = useParams();
+  const temp = '66405f50c4ebb621ab3e2542'
   const navigate = useNavigate();
   const [learners, setLearners] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -20,8 +22,7 @@ export default function LearnerList() {
     const fetchLearners = async () => {
       try {
         if (courseId) {
-          const temp = '66405f50c4ebb621ab3e2542'
-          const response = await fetch(`${apiUrl}/pay/course/${temp}`);
+          const response = await fetch(`${apiUrl}/pay/course/${courseId}`);
           const learnersData = await response.json();
 
           const learnersWithNames = await Promise.all(
@@ -49,11 +50,12 @@ export default function LearnerList() {
   }
 
   const handleLearnerClick = (learnerId) => {
-    navigate(`/instruct/courses/learnerprogress/${learnerId}`);
+    navigate(`/instruct/courses/learnerprogress/${learnerId}/${courseId}`);
   };
 
   return (
     <div>
+      <Typography variant='h6' className='text-center'>Learner List</Typography>
       <Box sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
         <List component="nav" aria-label="main mailbox folders">
           {learners.map((learner, index) => (

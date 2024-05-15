@@ -52,7 +52,7 @@ export default function App() {
             <Route path='addcourses' element={<AddCourses />} />
             <Route path='courses' element={<Courses />} />
             <Route path='courses/learnerlist/:courseId' element={<LearnerList />} />
-            <Route path='courses/learnerprogress/:lernerId' element={<LearnerProgress />} />
+            <Route path='courses/learnerprogress/:lernerId/:courseId' element={<LearnerProgress />} />
             <Route path='course/:id' element={<ViewCourse/>}/>
           </Route>
 
