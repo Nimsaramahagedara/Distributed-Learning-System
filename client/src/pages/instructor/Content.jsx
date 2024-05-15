@@ -18,6 +18,7 @@ import {
   TableRow,
   Paper,
   InputLabel,
+  Chip,
 } from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -78,27 +79,28 @@ export default function Content() {
   };
 
 
-  useEffect(() => {
-    const getCourseData = async () => {
-      try {
-        const response = await authAxios.get(`${apiUrl}/course/${courseId}`);
-        setCourse(response);
-        console.log(Course);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const getCourseData = async () => {
+    try {
+      const response = await authAxios.get(`${apiUrl}/course/${courseId}`);
+      setCourse(response);
+      console.log(Course);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    const getContents = async () => {
-      try {
-        const response = await authAxios.get(`${apiUrl}/course/content/course/${courseId}`);
-        setContents(response.data);
-        console.log(contents);
-        setIsLoading(false);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const getContents = async () => {
+    try {
+      const response = await authAxios.get(`${apiUrl}/course/content/course/${courseId}`);
+      setContents(response.data);
+      console.log(contents);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
 
     getCourseData();
     getContents();
@@ -123,6 +125,7 @@ export default function Content() {
         console.log('Content Published successfully:', data);
         toast.success(data.message);
         refreshPage();
+    getContents();
         handleClose();
       } else {
         console.error('Error creating teacher:', data.message);
@@ -139,6 +142,7 @@ export default function Content() {
       const result = await authAxios.delete(`${apiUrl}/course/content/${id}`);
 
       if (result) {
+        getContents();
         handleClose2();
         toast.warning('Content Deleted Successfully');
       }
@@ -154,6 +158,7 @@ export default function Content() {
       const result = await authAxios.put(`${apiUrl}/course/content/${updateFormData._id}`, updateFormData);
 
       if (result) {
+        getContents();
         toast.success('Content Updated Successfully');
         handleClose2();
         refreshPage();
@@ -166,7 +171,7 @@ export default function Content() {
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{marginRight: 5}}>
         Add Content
       </Button>
       <Button variant="outlined" onClick={()=>navigate(`/instruct/course/${courseId}`)}>
@@ -236,7 +241,7 @@ export default function Content() {
               <TableRow>
                 <TableCell>No</TableCell>
                 <TableCell>Title</TableCell>
-                <TableCell>Discription</TableCell>
+                {/* <TableCell>Discription</TableCell> */}
                 <TableCell>File</TableCell>
                 <TableCell>Status</TableCell>
                 <TableCell></TableCell>
@@ -246,9 +251,9 @@ export default function Content() {
                 <TableRow key={index}>
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{row.title}</TableCell>
-                  <TableCell>{row.description}</TableCell>
+                  {/* <TableCell>{row.description}</TableCell> */}
                   <TableCell>{row.file}</TableCell>
-                  <TableCell>{row.status == true ? 'Approved' : 'Pending'}</TableCell>
+                  <TableCell>{row.status == true ? <Chip color="success" label='Approved' size="small" /> : <Chip color="error" label='Pending' size="small" />}</TableCell>
                   <TableCell>
                     <Button variant="outlined" startIcon={<VisibilityIcon />} color="secondary"
                       onClick={() => handleUpdateContent(row)}
@@ -280,7 +285,7 @@ export default function Content() {
                             onChange={(e) => setUpdateFormData({ ...updateFormData, description: e.target.value })}
                             value={updateFormData.description}
                             multiline
-                            rows={4}
+                            rows={8}
                           />
                         </div>
                         <DialogActions style={{ justifyContent: 'center' }}>

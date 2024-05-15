@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Button from "@mui/material/Button";
 import Loader from '../../components/Loader/Loader';
 import MainCarousel from '../../components/Carousel/MainCarousel';
 import authAxios from '../../utils/authAxios';
 import { apiUrl } from '../../utils/Constants';
-import CourseCard from '../../components/Course/CourseCard';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
@@ -96,7 +99,29 @@ export default function Home() {
           <div className='flex items-center justify-start gap-5 w-max py-10'>
             {courses.length > 0 ? (
               courses.slice(0, 10).map((c) => (
-                <CourseCard key={c._id} course={c} />
+                <Card sx={{ maxWidth: 320 }} onClick={() => navigate(`./content/${c?._id}`)}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="50"
+                        image={c?.image ? c.image : "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"}
+                        alt="green iguana"
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {c?.name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {c?.description}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small" color="primary">
+                          Price : {c?.fee}
+                        </Button>
+                      </CardActions>
+                    </CardActionArea>
+                  </Card>
               ))
             ) : (
               <p>No courses available</p>
