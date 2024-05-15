@@ -6,6 +6,7 @@ import CourseModal from './CourseModal';
 
 export default function Course() {
     const initialCourse = {
+        id: '',
         name: '',
         description: '',
         fee: '',
@@ -53,7 +54,7 @@ export default function Course() {
   };
 
   const handleDelete = async (id) => {
-    await authAxios.delete(`/user/${id}`);
+    await authAxios.delete(`${apiUrl}/course/${id}`);
     fetchData();
   };
 

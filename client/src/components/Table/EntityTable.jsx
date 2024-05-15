@@ -49,7 +49,7 @@ const EntityTable = ({ heading, data, entityColumns, onEdit, onDelete }) => {
                 {onDelete && (
                   <td className="py-4 text-sm text-gray-900">
                     <button
-                      onClick={() => onDelete(row.id)}
+                      onClick={() => onDelete(row._id)}
                       className="flex items-center text-red-500 hover:text-red-700 bg-red-100 rounded-full p-1"
                     >
                       <DeleteIcon className="h-5 w-5" />

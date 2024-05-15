@@ -9,42 +9,42 @@ const CourseModal = ({ modalType, modalTopic, user, onClose, fetchData }) => {
     const [selectedInstructorId, setSelectedInstructorId] = useState('');
 
     useEffect(() => {
-        const fetchUsers = async () => {
-          try {
-            const response = await authAxios.get(`${apiUrl}/user/all`);
-            setUsersList(response.data);
-          } catch (error) {
-            console.error('Error fetching users:', error);
-          }
-        };
-    
-        fetchUsers();
-      }, []);
+      const fetchUsers = async () => {
+        try {
+          const response = await authAxios.get(`${apiUrl}/user/all`);
+          setUsersList(response.data);
+        } catch (error) {
+          console.error("Error fetching users:", error);
+        }
+      };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const payload = {
-      name: data.get("name"),
-      description: data.get("description"),
-      fee: data.get("fee"),
-      instructorId: data.get("instructorId"),
-    };
-    try {
-      if (modalType === "create") {
-        debugger;
-        await authAxios.post(`${apiUrl}/course`, payload);
-      } else if (modalType === "edit") {
-        await authAxios.put(`${apiUrl}/course/${user._id}`, payload);
+      fetchUsers();
+    }, []);
+
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const payload = {
+        id: data.get("id"),
+        name: data.get("name"),
+        description: data.get("description"),
+        fee: data.get("fee"),
+        instructorId: data.get("instructorId"),
+      };
+      try {
+        if (modalType === "create") {
+          await authAxios.post(`${apiUrl}/course/`, payload);
+        } else if (modalType === "edit") {
+          await authAxios.put(`${apiUrl}/course/${user._id}`, payload);
+        }
+
+        fetchData();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        onClose();
       }
-
-      fetchData();
-    } catch (error) {
-      console.log(error);
-    } finally {
-      onClose();
-    }
-  };
+    };
 
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center">
@@ -73,9 +73,19 @@ const CourseModal = ({ modalType, modalTopic, user, onClose, fetchData }) => {
         </div>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
+          <Grid item xs={12}>
+              <TextField
+                name="id"
+                required
+                fullWidth
+                id="id"
+                label="Code"
+                autoFocus
+                defaultValue={user.id}
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
-                autoComplete="given-name"
                 name="name"
                 required
                 fullWidth
