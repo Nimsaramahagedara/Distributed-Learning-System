@@ -4,7 +4,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link } from 'react-router-dom';
-import { ChromeReaderModeRounded } from '@material-ui/icons';
+import { Book, ChromeReaderModeRounded, Person, PieChart } from '@material-ui/icons';
 import { SupervisedUserCircleTwoTone } from '@mui/icons-material';
 
 export const adminListItems = (
@@ -41,25 +41,25 @@ export const instructorListItems = (
   <Link to={'/instruct'}>
     <ListItemButton>
       <ListItemIcon>
-        <DashboardIcon />
+        <Book />
       </ListItemIcon>
       <ListItemText primary="My Courses" />
     </ListItemButton>
   </Link>
-  <Link to={'/instruct/content'}>
+  <Link to={'./courses'}>
     <ListItemButton>
       <ListItemIcon>
-        <DashboardIcon />
+        <PieChart />
       </ListItemIcon>
-      <ListItemText primary="Manage Content" />
+      <ListItemText primary="Learner Progress" />
     </ListItemButton>
   </Link>
-  <Link to={'/instruct/enrollemnts'}>
+  <Link to={'./profile'}>
     <ListItemButton>
       <ListItemIcon>
-        <DashboardIcon />
+        <Person />
       </ListItemIcon>
-      <ListItemText primary="Enrollments" />
+      <ListItemText primary="Profile" />
     </ListItemButton>
   </Link>
   </React.Fragment>

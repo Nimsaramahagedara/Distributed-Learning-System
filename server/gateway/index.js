@@ -4,7 +4,7 @@ import morgan from 'morgan'
 import dotenv from 'dotenv'
 dotenv.config()
 import { createProxyMiddleware,fixRequestBody } from 'http-proxy-middleware'
-import { PAY_SERVICE, COURSE_SERVICE, USER_SERVICE, NOTI_SERVICE } from './services.js'
+import { PAY_SERVICE, COURSE_SERVICE, USER_SERVICE, NOTI_SERVICE, LEARN_SERVICE } from './services.js'
 import cookieParser from 'cookie-parser'
 
 const app = express()
@@ -51,6 +51,14 @@ app.use('/user', createProxyMiddleware({
 
 app.use('/notification', createProxyMiddleware({
     target: NOTI_SERVICE,
+    changeOrigin: true,
+    on: {
+        proxyReq: fixRequestBody,
+    },
+}))
+
+app.use('/learn', createProxyMiddleware({
+    target: LEARN_SERVICE,
     changeOrigin: true,
     on: {
         proxyReq: fixRequestBody,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import authAxios from '../../utils/authAxios';
 import { apiUrl } from '../../utils/Constants';
 import { Button } from '@mui/material';
@@ -8,12 +8,17 @@ import { toast } from 'react-toastify';
 const CourseViewPage = () => {
     const { id } = useParams()
     const [course, setCourse] = useState({});
+    const [content, setContent] = useState([])
+    const [searchParams] = useSearchParams()
+    const enroll= searchParams.get('enroll')
 
     const getOneCourse = async () => {
         try {
             const resp = await authAxios.get(`${apiUrl}/course/${id}`);
+            const content = await authAxios.get(`${apiUrl}/course/content/course/${id}`)
             console.log(resp.data);
             setCourse(resp.data)
+            setContent(content.data)
         } catch (error) {
             console.log(error);
         }
@@ -30,7 +35,7 @@ const CourseViewPage = () => {
             console.log(resp.data);
             if (resp?.data?.payUrl) {
                 window.location.href = resp.data.payUrl
-            }else{
+            } else {
                 throw Erro('Error creating paylink')
             }
 
@@ -59,15 +64,34 @@ const CourseViewPage = () => {
                         }
                     </p>
 
-                    <div className='flex items-center w-full gap-5 mt-32 mb-0'>
+                    {enroll == 'false' && <div className='flex items-center w-full gap-5 mt-32 mb-0'>
                         <Button variant='contained' onClick={handleBuyCourse} fullWidth>Buy Now</Button>
                         <Button variant='contained' className='text-white max-w-32' fullWidth>🛒</Button>
                     </div>
+                    }
 
                 </div>
 
 
 
+            </div>
+            <div>
+                <h1 className='text-2xl font-semibold'>Course Content</h1>
+
+                {enroll == 'false' && <span className='px-4 bg-red-400 rounded-xl py-2 text-white w-full block'>Payment Required</span>}
+                <div>
+                    {
+                     enroll == 'true' &&   content.map((c) => (
+                            <div className={`flex items-center justify-between px-4 py-2 border rounded-xl my-2 hover:bg-gray-200 ${c?.status ? '' : 'hidden'}`}>
+                                <span className='text-xl font-bold'> {c.title}</span>
+                                {
+                                    c?.description
+                                }
+                                <Link to={c?.file} target='_blank'>File</Link>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     )

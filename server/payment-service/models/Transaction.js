@@ -22,6 +22,8 @@ const transactionSchema = new mongoose.Schema({
         required:true,
     },
     
+},{
+    timestamps:true
 })
 
 const TransactionModel = mongoose.model('transactions',transactionSchema)

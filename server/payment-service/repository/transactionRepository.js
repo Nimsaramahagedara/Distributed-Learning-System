@@ -27,3 +27,12 @@ export const getAllUTx = async (uid) => {
         return error
     }
 }
+
+export const getAllCTx = async (cid) => {
+    try {
+        const tx = await TransactionModel.find({productId:cid});
+        return tx
+    } catch (error) {
+        return error
+    }
+}
