@@ -6,8 +6,13 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { Box, Button, CardActionArea, CardActions } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Accordion from '@mui/material/Accordion';
+import AccordionActions from '@mui/material/AccordionActions';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Courses = () => {
 
@@ -50,42 +55,34 @@ const Courses = () => {
 
   return (
     <div>
-      <div className='text-xl font-semibold my-5'>
+      <div>
         <h1 className='my-5'>Your Courses</h1>
         {!isLoading ?
-          <div className='w-full overflow-x-scroll'>
-            <div className='flex items-center justify-start gap-5 w-max py-10'>
-              {Courses.length > 0 ? (
-                Courses.slice(0, 10).map((course) => (
-                  <Card sx={{ maxWidth: 320 }} onClick={() => navigate(`./learnerlist/${course?._id}`)}>
-                    <CardActionArea>
-                      <CardMedia
-                        component="img"
-                        height="50"
-                        image={course?.image ? course.image : "https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg"}
-                        alt="green iguana"
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {course?.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {course?.description}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button size="small" color="primary">
-                          Price : {course?.fee}
-                        </Button>
-                      </CardActions>
-                    </CardActionArea>
-                  </Card>
-                ))
-              ) : (
-                <p>No courses available</p>
-              )}
-            </div>
-          </div>
+          <Box sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}>
+
+            {Courses.length > 0 ? (
+              Courses.slice(0, 10).map((course) => (
+
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                  >
+                    {course?.name} - {course?.id}
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    {course?.description}
+                  </AccordionDetails>
+                  <AccordionActions>
+                    <Button onClick={() => navigate(`./learnerlist/${course?._id}`)}>View Learners</Button>
+                  </AccordionActions>
+                </Accordion>
+              ))
+            ) : (
+              <p>No courses available</p>
+            )}
+          </Box>
           : <Loader />
         }
       </div>
